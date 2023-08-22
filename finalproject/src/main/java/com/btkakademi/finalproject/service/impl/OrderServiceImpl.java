@@ -2,10 +2,13 @@ package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.btkakademi.finalproject.model.dto.OrderDto;
 import com.btkakademi.finalproject.model.dto.ProductDto;
 import com.btkakademi.finalproject.service.OrderService;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Override

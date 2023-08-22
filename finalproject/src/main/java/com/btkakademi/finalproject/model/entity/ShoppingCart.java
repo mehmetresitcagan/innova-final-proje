@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -27,15 +28,16 @@ public class ShoppingCart {
     @Column(name = "sepet_urun_miktari")
     private List<Integer> productAmount;
 
-    @OneToMany
-    private int userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Liste mi yoksa tek bir product mı
-    @ManyToMany
-    private List<ProductDto> items;
+    //@ManyToMany
+    //private List<ProductDto> items;
 
-    @OneToOne
-    private OrderDto order;
+    //@OneToOne
+    //private OrderDto order;
 
     public int getShoppingCartId() {
         return shoppingCartId;
@@ -46,13 +48,13 @@ public class ShoppingCart {
     }
 
     public int getUserId() {
-        return userId;
+        return user.getUserId();
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.user.setUserId(userId);
     }
-
+/* 
     public List<ProductDto> getItems() {
         return items;
     }
@@ -60,5 +62,5 @@ public class ShoppingCart {
     public void setItems(List<ProductDto> items) {
         this.items = items;
     }
-
+*/
 }

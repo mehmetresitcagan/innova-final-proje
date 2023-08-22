@@ -2,9 +2,12 @@ package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.btkakademi.finalproject.model.entity.User;
 import com.btkakademi.finalproject.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 
     @Override

@@ -2,9 +2,12 @@ package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.btkakademi.finalproject.model.dto.ProductDto;
 import com.btkakademi.finalproject.service.ProductService;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Override
