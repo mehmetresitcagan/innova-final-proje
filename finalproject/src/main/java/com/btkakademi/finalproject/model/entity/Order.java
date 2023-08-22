@@ -1,10 +1,11 @@
 package com.btkakademi.finalproject.model.entity;
 
-import java.util.List;
+import com.btkakademi.finalproject.model.dto.ShoppingCartDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,11 +16,11 @@ public class Order {
     @Column(name = "siparis_id")
     private int orderId;
 
-    @Column(name = "siparis_listesi")
-    private List<Product> productList;
-
-    @Column(name = "toplam_siparis_tutari")
+    @Column(name = "toplam_tutari")
     private double totalAmount;
+
+    @OneToOne
+    private ShoppingCartDto cart;
 
     public int getOrderId() {
         return orderId;
@@ -27,14 +28,6 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     public double getTotalAmount() {
