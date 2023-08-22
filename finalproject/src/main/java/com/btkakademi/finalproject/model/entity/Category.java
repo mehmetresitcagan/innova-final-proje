@@ -10,25 +10,25 @@ import jakarta.persistence.Table;
 public class Category {
     @Id
     @Column(name = "kategori_id")
-    private int id;
+    private int categoryId;
 
     @Column(name = "kategori_adi")
-    private String name;
+    private String categoryName;
 
     public int getId() {
-        return id;
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
-        return name;
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
 }
