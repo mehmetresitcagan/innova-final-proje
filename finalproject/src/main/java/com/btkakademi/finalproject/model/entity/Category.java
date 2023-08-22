@@ -1,8 +1,13 @@
 package com.btkakademi.finalproject.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -10,25 +15,39 @@ import jakarta.persistence.Table;
 public class Category {
     @Id
     @Column(name = "kategori_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int categoryId;
 
     @Column(name = "kategori_adi")
     private String categoryName;
 
-    public int getId() {
+    @OneToMany(mappedBy="category")
+    private List<Product> products;
+
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setId(int categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public String getName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
-    public void setName(String categoryName) {
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+
 
 }

@@ -2,7 +2,11 @@ package com.btkakademi.finalproject.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -11,6 +15,7 @@ public class Product {
 
     @Id
     @Column(name = "urun_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int productId;
 
     @Column(name = "urun_adi")
@@ -24,6 +29,10 @@ public class Product {
 
     @Column(name = "urun_stok")
     private int stock;
+
+    @ManyToOne
+    @JoinColumn(name="urun_kategori_id", nullable=false)
+    private Category category;
 
     public int getProductId() {
         return productId;
@@ -65,13 +74,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
-
-    private Category categoryId;
 }

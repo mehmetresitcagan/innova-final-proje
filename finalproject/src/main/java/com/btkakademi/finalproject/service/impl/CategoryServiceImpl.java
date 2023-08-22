@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.btkakademi.finalproject.model.dto.CategoryDto;
 import com.btkakademi.finalproject.model.entity.Category;
 import com.btkakademi.finalproject.service.CategoryService;
 
@@ -11,7 +12,7 @@ import com.btkakademi.finalproject.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService {
 
     @Override
-    public int addCategory(Category category) {
+    public int addCategory(CategoryDto category) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addCategory'");
     }
@@ -23,13 +24,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Category category) {
+    public CategoryDto updateCategory(CategoryDto category) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateCategory'");
     }
 
     @Override
-    public Category getCategoryById(int categoryId) {
+    public CategoryDto getCategoryById(int categoryId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCategoryById'");
     }
@@ -41,15 +42,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> searchCategoryByName(String categoryName) {
+    public List<CategoryDto> searchCategoryByName(String categoryName) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'searchCategoryByName'");
     }
 
     @Override
-    public List<Category> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllCategories'");
     }
+
 
 }
