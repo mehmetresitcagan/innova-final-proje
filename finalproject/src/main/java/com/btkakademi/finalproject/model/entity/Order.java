@@ -5,6 +5,8 @@ import com.btkakademi.finalproject.model.dto.ShoppingCartDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,10 @@ public class Order {
 
     @Column(name = "toplam_tutari")
     private double totalAmount;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     public int getOrderId() {

@@ -1,10 +1,16 @@
 package com.btkakademi.finalproject.model.entity;
 
+
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +39,9 @@ public class User {
 
     @Column(name = "user_eposta")
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public User(String username, String password) {
         this.username = username;
