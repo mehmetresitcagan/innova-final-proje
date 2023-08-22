@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "urun_stok")
     private int stock;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "urun_kategori_id", nullable = false)
     private Category category;
 
