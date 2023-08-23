@@ -1,11 +1,14 @@
 package com.btkakademi.finalproject.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -33,6 +36,21 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "urun_kategori_id")
     private Category category;
+
+    // ..............
+
+    @ManyToMany(mappedBy = "products")
+    private List<ShoppingCart> shoppingCarts;
+
+    // ..............
+
+    public List<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
+
+    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
 
     public int getProductId() {
         return productId;

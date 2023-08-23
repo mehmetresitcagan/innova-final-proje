@@ -1,7 +1,5 @@
 package com.btkakademi.finalproject.model.entity;
 
-import com.btkakademi.finalproject.model.dto.ShoppingCartDto;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,7 +21,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 
     public int getOrderId() {
         return orderId;

@@ -2,17 +2,14 @@ package com.btkakademi.finalproject.model.entity;
 
 import java.util.List;
 
-import com.btkakademi.finalproject.model.dto.OrderDto;
-import com.btkakademi.finalproject.model.dto.ProductDto;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -32,12 +29,18 @@ public class ShoppingCart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Liste mi yoksa tek bir product mı
-    //@ManyToMany
-    //private List<ProductDto> items;
+    // .........
+    @ManyToMany
+    @JoinTable(name = "alisveris_sepeti_like", joinColumns = @JoinColumn(name = "sepet_id"), inverseJoinColumns = @JoinColumn(name = "urun_id"))
+    private List<Product> products;
+    // ........
 
-    //@OneToOne
-    //private OrderDto order;
+    // Liste mi yoksa tek bir product mı
+    // @ManyToMany
+    // private List<ProductDto> items;
+
+    // @OneToOne
+    // private OrderDto order;
 
     public int getShoppingCartId() {
         return shoppingCartId;
@@ -54,13 +57,13 @@ public class ShoppingCart {
     public void setUserId(int userId) {
         this.user.setUserId(userId);
     }
-/* 
-    public List<ProductDto> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ProductDto> items) {
-        this.items = items;
-    }
-*/
+    /*
+     * public List<ProductDto> getItems() {
+     * return items;
+     * }
+     * 
+     * public void setItems(List<ProductDto> items) {
+     * this.items = items;
+     * }
+     */
 }
