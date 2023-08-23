@@ -16,7 +16,7 @@ public interface CategoryService {
 
     boolean existsCategoryById(int categoryId);
 
-    List<Category> searchCategoryByName(String categoryName);
-
     List<Category> getAllCategories();
+
+    List<Category> searchCategoriesByCategoryName(String categoryName);
 }

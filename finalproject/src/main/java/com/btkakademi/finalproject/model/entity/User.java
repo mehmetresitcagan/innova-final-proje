@@ -16,7 +16,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
     @Column(name = "user_kullanici_adi")
@@ -36,9 +36,6 @@ public class User {
 
     @Column(name = "user_eposta")
     private String email;
-
-    @Column(name="Yetkilendirme")
-    private String role;
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
