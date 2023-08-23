@@ -2,21 +2,21 @@ package com.btkakademi.finalproject.service;
 
 import java.util.List;
 
-import com.btkakademi.finalproject.model.dto.CategoryDto;
+import com.btkakademi.finalproject.model.entity.Category;
 
 public interface CategoryService {
 
-    int addCategory(CategoryDto category);
+    int addCategory(Category category);
 
     boolean deleteCategory(int categoryId);
 
-    CategoryDto updateCategory(CategoryDto category);
+    Category updateCategory(Category category);
 
-    CategoryDto getCategoryById(int categoryId);
+    Category getCategoryById(int categoryId);
 
     boolean existsCategoryById(int categoryId);
 
-    List<CategoryDto> searchCategoryByName(String categoryName);
+    List<Category> searchCategoryByName(String categoryName);
 
-    List<CategoryDto> getAllCategories();
+    List<Category> getAllCategories();
 }

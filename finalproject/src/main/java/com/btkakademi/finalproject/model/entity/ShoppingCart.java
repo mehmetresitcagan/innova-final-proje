@@ -35,13 +35,6 @@ public class ShoppingCart {
     private List<Product> products;
     // ........
 
-    // Liste mi yoksa tek bir product mı
-    // @ManyToMany
-    // private List<ProductDto> items;
-
-    // @OneToOne
-    // private OrderDto order;
-
     public int getShoppingCartId() {
         return shoppingCartId;
     }

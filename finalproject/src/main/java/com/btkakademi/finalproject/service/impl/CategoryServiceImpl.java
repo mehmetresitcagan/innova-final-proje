@@ -2,18 +2,23 @@ package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.btkakademi.finalproject.model.dto.CategoryDto;
+import com.btkakademi.finalproject.model.entity.Category;
+import com.btkakademi.finalproject.repository.CategoryRepository;
 import com.btkakademi.finalproject.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    @Autowired
+    CategoryRepository repository;
+
     @Override
-    public int addCategory(CategoryDto category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCategory'");
+    public int addCategory(Category category) {
+        repository.save(category);
+        return category.getCategoryId();
     }
 
     @Override
@@ -23,13 +28,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto updateCategory(CategoryDto category) {
+    public Category updateCategory(Category category) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateCategory'");
     }
 
     @Override
-    public CategoryDto getCategoryById(int categoryId) {
+    public Category getCategoryById(int categoryId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCategoryById'");
     }
@@ -41,15 +46,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> searchCategoryByName(String categoryName) {
+    public List<Category> searchCategoryByName(String categoryName) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'searchCategoryByName'");
     }
 
     @Override
-    public List<CategoryDto> getAllCategories() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllCategories'");
+    public List<Category> getAllCategories() {
+        return repository.findAll();
     }
 
 }

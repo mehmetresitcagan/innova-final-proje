@@ -1,16 +1,18 @@
 package com.btkakademi.finalproject.controller;
 
-import com.btkakademi.finalproject.model.dto.CategoryDto;
+import com.btkakademi.finalproject.model.entity.Category;
 import com.btkakademi.finalproject.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
+    @Autowired
     private final CategoryService categoryService;
 
     @Autowired
@@ -18,25 +20,29 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
-    public List<CategoryDto> getAllCategories() {
+    @GetMapping(value = "")
+    public List<Category> getAllCategories() {
+
         return categoryService.getAllCategories();
+
     }
 
     @GetMapping("/{categoryId}")
-    public CategoryDto getCategoryById(@PathVariable int categoryId) {
+    public Category getCategoryById(@PathVariable int categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
 
-    @PostMapping
-    public int addCategory(@RequestBody CategoryDto categoryDto) {
-        return categoryService.addCategory(categoryDto);
+    @PostMapping(value = "")
+    public ResponseEntity<String> addCategory(@RequestBody Category Category) {
+        categoryService.addCategory(Category);
+
+        return ResponseEntity.ok("Başarılı");
     }
 
     @PutMapping("/{categoryId}")
-    public CategoryDto updateCategory(@PathVariable int categoryId, @RequestBody CategoryDto categoryDto) {
-        categoryDto.setCategoryId(categoryId);
-        return categoryService.updateCategory(categoryDto);
+    public Category updateCategory(@PathVariable int categoryId, @RequestBody Category Category) {
+        Category.setCategoryId(categoryId);
+        return categoryService.updateCategory(Category);
     }
 
     @DeleteMapping("/{categoryId}")
@@ -45,7 +51,7 @@ public class CategoryController {
     }
 
     @GetMapping("/search")
-    public List<CategoryDto> searchCategoryByName(@RequestParam String categoryName) {
+    public List<Category> searchCategoryByName(@RequestParam String categoryName) {
         return categoryService.searchCategoryByName(categoryName);
     }
 }
