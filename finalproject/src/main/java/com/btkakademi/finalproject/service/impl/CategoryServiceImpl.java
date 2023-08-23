@@ -28,9 +28,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCategory'");
+    public Category updateCategory(Category category, int categoryId) {
+        Category insider = getCategoryById(categoryId);
+        if (repository.existsById(categoryId)) {
+            insider.setCategoryId(category.getCategoryId());
+            insider.setCategoryName(category.getCategoryName());
+            return insider;
+        }
+        // throw atılacak (güncellenemedi gibi)
+        return new Category();
     }
 
     @Override
