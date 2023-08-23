@@ -1,7 +1,15 @@
 package com.btkakademi.finalproject.controller;
 
+<<<<<<< Updated upstream
 import com.btkakademi.finalproject.model.entity.Category;
+import com.btkakademi.finalproject.model.vm.CategoryVm.AddCategoryVm;
+import com.btkakademi.finalproject.model.vm.CategoryVm.UpdateCategoryVm;
+import com.btkakademi.finalproject.model.dto.CategoryDto;
 import com.btkakademi.finalproject.service.CategoryService;
+import com.btkakademi.finalproject.util.mapper.CategoryMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +24,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+    CategoryService categoryService;
+
 
     @GetMapping(value = "")
     public List<Category> getAllCategories() {
@@ -43,15 +50,45 @@ public class CategoryController {
     public Category updateCategory(@PathVariable int categoryId, @RequestBody Category Category) {
         Category.setCategoryId(categoryId);
         return categoryService.updateCategory(Category);
+=======
+    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    @GetMapping(value = "")
+    public List<CategoryDto> getAllCategories() {
+        List<CategoryDto> categoryList = categoryService.getAllCategories();
+        logger.info("Listeleme Başarılı");
+        return categoryList;
     }
 
-    @DeleteMapping("/{categoryId}")
-    public boolean deleteCategory(@PathVariable int categoryId) {
-        return categoryService.deleteCategory(categoryId);
+    @GetMapping(value = "/{id}")
+    public CategoryDto getByCategoryId(@PathVariable("id") int id) {
+        CategoryDto category = categoryService.getCategoryById(id);
+        return category;
     }
 
+    @GetMapping(value = "/searchByName/{name}")
+    public List<CategoryDto> searchByName(@PathVariable("name") String categoryName) {
+        List<CategoryDto> categoryList = categoryService.searchCategoryByName(categoryName);
+        return categoryList;
+    }
+
+    @PostMapping(value = "")
+    public int addCategory(@RequestBody AddCategoryVm categoryVm) {
+        int recordedId = categoryService.addCategory(CategoryMapper.mapAddVmToDto(categoryVm));
+        return recordedId;
+>>>>>>> Stashed changes
+    }
+
+    @PutMapping(value = "")
+    public CategoryDto updateCategory(@RequestBody UpdateCategoryVm categoryVm) {
+        CategoryDto vm = categoryService.updateCategory(CategoryMapper.mapUpdateVmToDto(categoryVm));
+        return vm;
+    }
+
+<<<<<<< Updated upstream
     @GetMapping("/search")
     public List<Category> searchCategoryByName(@RequestParam String categoryName) {
         return categoryService.searchCategoryByName(categoryName);
     }
+=======
+>>>>>>> Stashed changes
 }

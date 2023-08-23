@@ -19,7 +19,7 @@ public class ShoppingCart {
 
     @Id
     @Column(name = "sepet_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int shoppingCartId;
 
     @Column(name = "sepet_urun_miktari")

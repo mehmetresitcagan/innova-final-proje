@@ -18,7 +18,7 @@ public class Product {
 
     @Id
     @Column(name = "urun_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
 
     @Column(name = "urun_adi")
