@@ -1,10 +1,9 @@
 package com.btkakademi.finalproject.model.vm.CategoryVm;
 
-import jakarta.validation.constraints.NotBlank;
+
 
 public class AddCategoryVm {
 
-    @NotBlank
     private String name;
 
     public String getName() {

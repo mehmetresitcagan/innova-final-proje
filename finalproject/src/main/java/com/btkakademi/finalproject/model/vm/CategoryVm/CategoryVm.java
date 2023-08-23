@@ -1,13 +1,11 @@
 package com.btkakademi.finalproject.model.vm.CategoryVm;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 
 public class CategoryVm {
 
-    @NotNull
     private int id;
-    @NotBlank
+
     private String name;
 
     public int getId() {
