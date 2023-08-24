@@ -1,4 +1,4 @@
-package com.btkakademi.finalproject.model.dto;
+package com.btkakademi.finalproject.model.vm.ProductVm;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import com.btkakademi.finalproject.model.entity.Category;
 import com.btkakademi.finalproject.model.entity.Order;
 import com.btkakademi.finalproject.model.entity.ShoppingCart;
 
-public class ProductDto {
-
+public class UpdateProductVm {
     private int productId;
 
     private String productName;
@@ -87,5 +86,4 @@ public class ProductDto {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
 }

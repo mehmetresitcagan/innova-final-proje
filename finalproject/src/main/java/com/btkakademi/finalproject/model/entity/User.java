@@ -49,6 +49,11 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.address = ""; // Varsayılan adres
+        this.firstName = ""; // Varsayılan ad
+        this.lastName = ""; // Varsayılan soyad
+        this.email = ""; // Varsayılan email
+        this.roles = ""; // Varsayılan rol
     }
 
     public String getRoles() {
