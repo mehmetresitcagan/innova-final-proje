@@ -29,9 +29,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Order category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateOrder'");
+    public Order updateOrder(Order order, int orderId) {
+        Order insider = repository.findByOrderId(orderId);
+        if (repository.existsById(orderId)) {
+            insider.setOrderId(order.getOrderId());
+            return insider;
+        }
+        // throw atılacak (güncellenemedi gibi)
+        return new Order();
     }
 
     @Override

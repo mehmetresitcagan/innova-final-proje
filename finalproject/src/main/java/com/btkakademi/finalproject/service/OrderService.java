@@ -10,7 +10,7 @@ public interface OrderService {
 
     boolean deleteOrder(int orderId);
 
-    Order updateOrder(Order order);
+    Order updateOrder(Order order, int orderId);
 
     boolean existsOrderById(int orderId);
 
