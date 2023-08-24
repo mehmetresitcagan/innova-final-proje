@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userId);
     }
 
+    @Override
+    public void userRoles(String roles) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'userRoles'");
+    }
+
 }

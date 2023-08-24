@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.service;
 
+import com.btkakademi.finalproject.model.entity.ShoppingCart;
 
 public interface ShoppingCartService {
 

@@ -31,15 +31,30 @@ public class User {
     @Column(name = "user_sifre")
     private String password;
 
+    @Column(name = "user_adres")
+    private String address;
+
     @Column(name = "user_eposta")
     private String email;
+
+    @Column(name = "Yetkilendirme")
+    private String roles;
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
+    // constructor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public int getUserId() {
@@ -80,6 +95,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {

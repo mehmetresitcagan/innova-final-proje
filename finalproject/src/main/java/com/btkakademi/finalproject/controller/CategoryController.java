@@ -1,7 +1,13 @@
 package com.btkakademi.finalproject.controller;
 
+import com.btkakademi.finalproject.model.dto.CategoryDto;
 import com.btkakademi.finalproject.model.entity.Category;
+import com.btkakademi.finalproject.model.vm.CategoryVm.UpdateCategoryVm;
 import com.btkakademi.finalproject.service.CategoryService;
+import com.btkakademi.finalproject.util.mapper.CategoryMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,44 +21,53 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping(value = "")
-    public List<Category> getAllCategories() {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-        return categoryService.getAllCategories();
+    @GetMapping(value = "/getAll") // başarılı (full)
+    public List<CategoryDto> getAllCategories() {
+        List<CategoryDto> categoryList = categoryService.getAllCategories();
+        logger.info("Listeleme Başarılı");
+        return categoryList;
+
+        // return categoryService.getAllCategories();
 
     }
 
-    @GetMapping("/{categoryId}")
-    public Category getCategoryById(@PathVariable int categoryId) {
-        return categoryService.getCategoryById(categoryId);
+    @GetMapping("/{categoryId}") // başarılı (id + name)
+    public CategoryDto getCategoryById(@PathVariable int categoryId) {
+        CategoryDto category = categoryService.getCategoryById(categoryId);
+        return category;
+
+        // return categoryService.getCategoryById(categoryId);
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity<String> addCategory(@RequestBody Category Category) {
-        categoryService.addCategory(Category);
-
-        return ResponseEntity.ok("Başarılı");
+    @PostMapping("") // bu tammamdır -- id dönüyor 
+    public int addCategory(@RequestBody CategoryDto categoryDto) {
+        int categoryId = categoryService.addCategory(categoryDto);
+        return categoryId;
     }
 
-    @PutMapping("/{categoryId}")
-    public Category updateCategory(@PathVariable int categoryId, @RequestBody Category Category) {
-        Category.setCategoryId(categoryId);
-        return categoryService.updateCategory(Category, categoryId);
-    }
-
-    @DeleteMapping("/{categoryId}")
-    public boolean deleteCategory(@PathVariable int categoryId) {
-        boolean existsCategoryById = categoryService.existsCategoryById(categoryId);
-        if (existsCategoryById) {
-            categoryService.deleteCategory(categoryId);
-            return true;
-        }
-        return false;
+    @PutMapping("/{categoryId}") // başarılı
+    public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto) {
+        CategoryDto category = categoryService.updateCategory(categoryDto);
+        return category;
     }
 
     @GetMapping(value = "/searchByName/{name}")
-    public List<Category> searchCategoryByCategoryName(@PathVariable("name") String categoryName) {
-        List<Category> categoryList = categoryService.searchCategoriesByCategoryName(categoryName);
+    public List<Category> searchByName(@PathVariable("name") String name) {
+        List<Category> categoryList = categoryService.searchCategoriesByCategoryName(name);
         return categoryList;
+        
     }
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<String> deleteCategoryById(@PathVariable int categoryId) {
+        boolean deleted = categoryService.deleteCategory(categoryId);
+
+        if (deleted) {
+            return ResponseEntity.ok("Kategori silindi");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

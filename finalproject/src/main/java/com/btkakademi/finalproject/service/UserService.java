@@ -17,4 +17,6 @@ public interface UserService {
     void deleteUser(int userId);
 
     User getByEmail(String email);
+
+    void userRoles(String roles);
 }
