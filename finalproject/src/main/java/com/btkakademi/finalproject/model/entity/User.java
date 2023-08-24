@@ -36,9 +36,6 @@ public class User {
     @Column(name = "user_sifre")
     private String password;
 
-    @Column(name = "user_adres")
-    private String address;
-
     @Column(name = "user_eposta")
     private String email;
 

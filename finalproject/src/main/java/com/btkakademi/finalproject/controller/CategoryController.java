@@ -2,9 +2,7 @@ package com.btkakademi.finalproject.controller;
 
 import com.btkakademi.finalproject.model.dto.CategoryDto;
 import com.btkakademi.finalproject.model.entity.Category;
-import com.btkakademi.finalproject.model.vm.CategoryVm.UpdateCategoryVm;
 import com.btkakademi.finalproject.service.CategoryService;
-import com.btkakademi.finalproject.util.mapper.CategoryMapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +39,7 @@ public class CategoryController {
         // return categoryService.getCategoryById(categoryId);
     }
 
-    @PostMapping("") // bu tammamdır -- id dönüyor 
+    @PostMapping("") // bu tammamdır -- id dönüyor
     public int addCategory(@RequestBody CategoryDto categoryDto) {
         int categoryId = categoryService.addCategory(categoryDto);
         return categoryId;
@@ -57,8 +55,9 @@ public class CategoryController {
     public List<Category> searchByName(@PathVariable("name") String name) {
         List<Category> categoryList = categoryService.searchCategoriesByCategoryName(name);
         return categoryList;
-        
+
     }
+
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<String> deleteCategoryById(@PathVariable int categoryId) {
         boolean deleted = categoryService.deleteCategory(categoryId);
