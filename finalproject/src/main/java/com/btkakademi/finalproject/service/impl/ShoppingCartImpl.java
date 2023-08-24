@@ -9,24 +9,26 @@ import com.btkakademi.finalproject.model.entity.ShoppingCart;
 import com.btkakademi.finalproject.repository.ShoppingCartRepository;
 import com.btkakademi.finalproject.service.ShoppingCartService;
 
+//import jakarta.validation.ReportAsSingleViolation;
+
 @Service
 public class ShoppingCartImpl implements ShoppingCartService {
 
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    ShoppingCartRepository repository;
 
     @Override
     public ShoppingCart getShoppingCartById(int cartId) {
-        Optional<ShoppingCart> sOptional = shoppingCartRepository.findAll(cartId);
+        Optional<ShoppingCart> sOptional = repository.findAll(cartId);
         return sOptional.orElseThrow();
 
     }
 
     @Override
     public ShoppingCart updateShoppingCart(int cartId, ShoppingCart shoppingCart) {
-        if (shoppingCartRepository.existsById(cartId)) {
+        if (repository.existsById(cartId)) {
             shoppingCart.setShoppingCartId(cartId);
-            return shoppingCartRepository.save(shoppingCart);
+            return repository.save(shoppingCart);
         }
         return null;
 
@@ -34,19 +36,66 @@ public class ShoppingCartImpl implements ShoppingCartService {
 
     @Override
     public boolean deleteShoppingCart(int cartId) {
-        shoppingCartRepository.deleteById(cartId);
+        repository.deleteById(cartId);
         return true;
     }
 
     @Override
     public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) {
-        return shoppingCartRepository.save(shoppingCart);
+        return repository.save(shoppingCart);
     }
 
     @Override
     public boolean existsShoppingCartId(int cartId) {
-        return shoppingCartRepository.existsById(cartId);
-  
+        return repository.existsById(cartId);
+
     }
+
+    /*
+     * @Override
+     * public double calculateTotalPrice(List<Product> products) {
+     * double totalPrice = 0.0;
+     * for (Product product : products) {
+     * totalPrice += product.getPrice();
+     * }
+     * return totalPrice;
+     * }
+     * 
+     * @Override
+     * public void addProductToShoppingCart(Product product, int cartId) {
+     * if(repository.existsById(cartId)){
+     * 
+     * }
+     * }
+     * 
+     * @Override
+     * public void deleteProductFromShoppingCart(Product product, int cartId) {
+     * // TODO Auto-generated method stub
+     * throw new
+     * UnsupportedOperationException("Unimplemented method 'deleteProductFromShoppingCart'"
+     * );
+     * }
+     * 
+     * @Override
+     * public void updateShoppingCart(ShoppingCart cart, int cartId) {
+     * // TODO Auto-generated method stub
+     * throw new
+     * UnsupportedOperationException("Unimplemented method 'updateShoppingCart'");
+     * }
+     * 
+     * @Override
+     * public void cleanShoppingCart(int cartId) {
+     * // TODO Auto-generated method stub
+     * throw new
+     * UnsupportedOperationException("Unimplemented method 'cleanShoppingCart'");
+     * }
+     * 
+     * @Override
+     * public Order confirmShoppingCart(int cartId) {
+     * // TODO Auto-generated method stub
+     * throw new
+     * UnsupportedOperationException("Unimplemented method 'confirmShoppingCart'");
+     * }
+     */
 
 }
