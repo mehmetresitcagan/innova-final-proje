@@ -31,9 +31,6 @@ public class User {
     @Column(name = "user_sifre")
     private String password;
 
-    @Column(name = "user_adres")
-    private String address;
-
     @Column(name = "user_eposta")
     private String email;
 
@@ -83,14 +80,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getEmail() {

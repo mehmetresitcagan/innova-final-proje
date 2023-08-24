@@ -14,12 +14,6 @@ public class CategoryController {
 
     @Autowired
     CategoryService categoryService;
-    /*
-     * @Autowired
-     * public CategoryController(CategoryService categoryService) {
-     * this.categoryService = categoryService;
-     * }
-     */
 
     @GetMapping(value = "")
     public List<Category> getAllCategories() {
@@ -43,7 +37,7 @@ public class CategoryController {
     @PutMapping("/{categoryId}")
     public Category updateCategory(@PathVariable int categoryId, @RequestBody Category Category) {
         Category.setCategoryId(categoryId);
-        return categoryService.updateCategory(Category);
+        return categoryService.updateCategory(Category, categoryId);
     }
 
     @DeleteMapping("/{categoryId}")

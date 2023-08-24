@@ -2,53 +2,61 @@ package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.btkakademi.finalproject.model.dto.OrderDto;
-import com.btkakademi.finalproject.model.dto.ProductDto;
+import com.btkakademi.finalproject.model.entity.Order;
+import com.btkakademi.finalproject.model.entity.Product;
+import com.btkakademi.finalproject.repository.OrderRepository;
 import com.btkakademi.finalproject.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    @Autowired
+    OrderRepository repository;
+
     @Override
-    public int addOrder(OrderDto category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addOrder'");
+    public int addOrder(Order order) {
+        repository.save(order);
+        return order.getOrderId();
     }
 
     @Override
     public boolean deleteOrder(int orderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteOrder'");
+        repository.deleteById(orderId);
+        return true;
     }
 
     @Override
-    public OrderDto updateOrder(OrderDto category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateOrder'");
+    public Order updateOrder(Order order, int orderId) {
+        Order insider = repository.findByOrderId(orderId);
+        if (repository.existsById(orderId)) {
+            insider.setOrderId(order.getOrderId());
+            return insider;
+        }
+        // throw atılacak (güncellenemedi gibi)
+        return new Order();
     }
 
     @Override
-    public boolean existsOrderById(int categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsOrderById'");
+    public boolean existsOrderById(int orderId) {
+        return repository.existsById(orderId);
     }
 
     @Override
-    public List<OrderDto> searchOrderById(int orderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchOrderById'");
+    public Order searchOrderByOrderId(int orderId) {
+
+        return repository.findByOrderId(orderId);
     }
 
     @Override
-    public List<OrderDto> getAllOrders() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllOrders'");
+    public List<Order> getAllOrders() {
+        return repository.findAll();
     }
 
     @Override
-    public List<ProductDto> getAllProducts(int orderId) {
+    public List<Product> getAllProducts(int orderId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllProducts'");
     }

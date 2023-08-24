@@ -1,43 +1,55 @@
 package com.btkakademi.finalproject.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.btkakademi.finalproject.model.entity.User;
+import com.btkakademi.finalproject.repository.UserRepository;
 import com.btkakademi.finalproject.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<User> getAllUsers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(int userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+        Optional<User> userOptional = userRepository.findById(userId);
+        return userOptional.orElse(null);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        User userOptional = userRepository.findByEmail(email);
+        return userOptional;
     }
 
     @Override
     public User createUser(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+        return userRepository.save(user);
     }
 
     @Override
     public User updateUser(int userId, User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
+        if (userRepository.existsById(userId)) {
+            user.setUserId(userId);
+            return userRepository.save(user);
+        }
+        return null;
     }
 
     @Override
     public void deleteUser(int userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        userRepository.deleteById(userId);
     }
 
 }

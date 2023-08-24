@@ -1,52 +1,61 @@
 package com.btkakademi.finalproject.controller;
 
-import com.btkakademi.finalproject.model.dto.OrderDto;
-import com.btkakademi.finalproject.model.dto.ProductDto;
+import com.btkakademi.finalproject.model.entity.Order;
+import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("api/orders")
 public class OrderController {
 
-    private final OrderService orderService;
+    @Autowired
+    OrderService service;
 
     @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(OrderService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public int addOrder(@RequestBody OrderDto orderDto) {
-        return orderService.addOrder(orderDto);
+    @PostMapping(value = "")
+    public ResponseEntity<String> addOrder(@RequestBody Order order) {
+        service.addOrder(order);
+        return ResponseEntity.ok("Order ekleme başarılı");
+    }
+
+    // YAPILACAK
+    @PutMapping("/{orderId}")
+    public Order updateOrder(@PathVariable int orderId, @RequestBody Order order) {
+        order.setOrderId(orderId);
+        return service.updateOrder(order,orderId);
     }
 
     @DeleteMapping("/{orderId}")
     public boolean deleteOrder(@PathVariable int orderId) {
-        return orderService.deleteOrder(orderId);
-    }
-
-    @PutMapping("/{orderId}")
-    public OrderDto updateOrder(@PathVariable int orderId, @RequestBody OrderDto orderDto) {
-        orderDto.setOrderId(orderId);
-        return orderService.updateOrder(orderDto);
+        boolean existsOrderById = service.existsOrderById(orderId);
+        if (existsOrderById) {
+            service.deleteOrder(orderId);
+            return true;
+        }
+        return false;
     }
 
     @GetMapping("/{orderId}")
-    public List<OrderDto> searchOrderById(@PathVariable int orderId) {
-        return orderService.searchOrderById(orderId);
+    public Order searchOrderByOrderId(@PathVariable int orderId) {
+        return service.searchOrderByOrderId(orderId);
     }
 
-    @GetMapping
-    public List<OrderDto> getAllOrders() {
-        return orderService.getAllOrders();
+    @GetMapping(value = "")
+    public List<Order> getAllOrders() {
+        return service.getAllOrders();
     }
 
     @GetMapping("/{orderId}/products")
-    public List<ProductDto> getAllProducts(@PathVariable int orderId) {
-        return orderService.getAllProducts(orderId);
+    public List<Product> getAllProducts(@PathVariable int orderId) {
+        return service.getAllProducts(orderId);
     }
 }
