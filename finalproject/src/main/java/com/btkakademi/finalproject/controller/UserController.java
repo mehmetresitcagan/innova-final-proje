@@ -11,25 +11,22 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
-    @GetMapping
+
+    @GetMapping(value = "/All")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable int userId) {
+    public User getUserById(@RequestBody int userId) {
         return userService.getUserById(userId);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
+    @PostMapping(value="/create")
+    public User createUser(@RequestBody User user) { // userID de istiyor sıkıntı mı ? 
         return userService.createUser(user);
     }
 
@@ -38,8 +35,8 @@ public class UserController {
         return userService.updateUser(userId, user);
     }
 
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable int userId) {
+    @DeleteMapping("/delete/{userId}")
+    public void deleteUser(@PathVariable int userId) {  // , @RequestParam String password eklenecek spring ssecurityde   
         userService.deleteUser(userId);
     }
 }
