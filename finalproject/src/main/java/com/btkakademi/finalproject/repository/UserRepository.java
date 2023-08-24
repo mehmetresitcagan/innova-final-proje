@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.btkakademi.finalproject.model.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User , Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from kullanicilar", nativeQuery = true)
     List<User> findAll();

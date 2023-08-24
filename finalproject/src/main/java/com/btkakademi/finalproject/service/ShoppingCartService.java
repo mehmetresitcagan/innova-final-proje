@@ -14,4 +14,18 @@ public interface ShoppingCartService {
 
     boolean existsShoppingCartId(int cartId);
 
+    /*
+     * double calculateTotalPrice(List<Product> products);
+     * 
+     * void addProductToShoppingCart(Product product, int cartId);
+     * 
+     * void deleteProductFromShoppingCart(Product product, int cartId);
+     * 
+     * void updateShoppingCart(ShoppingCart cart, int cartId);
+     * 
+     * void cleanShoppingCart(int cartId);
+     * 
+     * Order confirmShoppingCart(int cartId);
+     */
+
 }

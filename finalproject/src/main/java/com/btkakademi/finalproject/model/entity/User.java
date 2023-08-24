@@ -9,15 +9,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "kullanicilar")
+@NoArgsConstructor
 public class User {
 
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
+
+    @Column(name = "user_adres")
+    private String address;
 
     @Column(name = "user_kullanici_adi")
     private String username;

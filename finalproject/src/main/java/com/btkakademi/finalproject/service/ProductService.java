@@ -1,20 +1,22 @@
 package com.btkakademi.finalproject.service;
 
-import com.btkakademi.finalproject.model.dto.ProductDto;
+import com.btkakademi.finalproject.model.entity.Product;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<ProductDto> getAllProducts();
+    List<Product> getAllProducts();
 
-    ProductDto getProductById(int productId);
+    Product getProductById(int productId);
 
-    int addProduct(ProductDto productDto);
+    int addProduct(Product product);
 
-    ProductDto updateProduct(int productId, ProductDto productDto);
+    Product updateProduct(Product product, int productId);
 
     boolean deleteProduct(int productId);
 
-    List<ProductDto> searchProductByName(String productName);
+    List<Product> searchProductByName(String productName);
+
+    boolean existsProductById(int productId);
 }

@@ -44,6 +44,13 @@ public class Product {
 
     // ..............
 
+    // ..............
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
+
+    // ..............
+
     public List<ShoppingCart> getShoppingCarts() {
         return shoppingCarts;
     }

@@ -1,11 +1,15 @@
 package com.btkakademi.finalproject.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -18,12 +22,15 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
-    @Column(name = "toplam_tutari")
-    private double totalAmount;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    // .........
+    @ManyToMany
+    @JoinTable(name = "urunler_like", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "urun_id"))
+    private List<Product> products;
+    // ........
 
     public int getOrderId() {
         return orderId;
@@ -31,14 +38,6 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
     }
 
 }
