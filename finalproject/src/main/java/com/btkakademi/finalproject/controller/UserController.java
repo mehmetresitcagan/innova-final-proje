@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-
-    @GetMapping(value = "/All")
+    @GetMapping(value = "/getAll")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -25,8 +24,8 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
-    @PostMapping(value="/create")
-    public User createUser(@RequestBody User user) { // userID de istiyor sıkıntı mı ? 
+    @PostMapping(value = "/create")
+    public User createUser(@RequestBody User user) { // userID de istiyor sıkıntı mı ?
         return userService.createUser(user);
     }
 
@@ -36,7 +35,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable int userId) {  // , @RequestParam String password eklenecek spring ssecurityde   
+    public void deleteUser(@PathVariable int userId) { // , @RequestParam String password eklenecek spring ssecurityde
         userService.deleteUser(userId);
     }
 }

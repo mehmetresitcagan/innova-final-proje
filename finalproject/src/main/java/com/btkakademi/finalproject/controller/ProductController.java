@@ -1,6 +1,6 @@
 package com.btkakademi.finalproject.controller;
 
-import com.btkakademi.finalproject.model.dto.ProductDto;
+import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,41 +11,41 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService service;
 
     @Autowired
     public ProductController(ProductService productService) {
-        this.productService = productService;
+        this.service = productService;
     }
 
     @GetMapping
-    public List<ProductDto> getAllProducts() {
-        return productService.getAllProducts();
+    public List<Product> getAllProducts() {
+        return service.getAllProducts();
     }
 
     @GetMapping("/{productId}")
-    public ProductDto getProductById(@PathVariable int productId) {
-        return productService.getProductById(productId);
+    public Product getProductById(@PathVariable int productId) {
+        return service.getProductById(productId);
     }
 
     @PostMapping
-    public int addProduct(@RequestBody ProductDto productDto) {
-        return productService.addProduct(productDto);
+    public int addProduct(@RequestBody Product product) {
+        return service.addProduct(product);
     }
 
     @PutMapping("/{productId}")
-    public ProductDto updateProduct(@PathVariable int productId, @RequestBody ProductDto productDto) {
-        productDto.setProductId(productId);
-        return productService.updateProduct(productId, productDto);
+    public Product updateProduct(@PathVariable int productId, @RequestBody Product product) {
+        product.setProductId(productId);
+        return service.updateProduct(product, productId);
     }
 
     @DeleteMapping("/{productId}")
     public boolean deleteProduct(@PathVariable int productId) {
-        return productService.deleteProduct(productId);
+        return service.deleteProduct(productId);
     }
 
     @GetMapping("/search")
-    public List<ProductDto> searchProductByName(@RequestParam String productName) {
-        return productService.searchProductByName(productName);
+    public List<Product> searchProductByName(@RequestParam String productName) {
+        return service.searchProductByName(productName);
     }
 }
