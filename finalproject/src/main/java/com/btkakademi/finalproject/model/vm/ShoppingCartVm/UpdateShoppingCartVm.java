@@ -1,16 +1,13 @@
-package com.btkakademi.finalproject.model.dto;
+package com.btkakademi.finalproject.model.vm.ShoppingCartVm;
 
 import java.util.List;
 
 import com.btkakademi.finalproject.model.entity.User;
 
-public class ShoppingCartDto {
-
+public class UpdateShoppingCartVm {
     private int shoppingCartId;
     private List<Integer> productAmount;
     private User user;
-
-    // Getter ve setter metotları buraya gelecek...
 
     public int getShoppingCartId() {
         return shoppingCartId;
@@ -35,4 +32,5 @@ public class ShoppingCartDto {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

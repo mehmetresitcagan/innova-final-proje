@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.btkakademi.finalproject.model.entity.ShoppingCart;
 import com.btkakademi.finalproject.service.ShoppingCartService;
 
-
 @RestController
 @RequestMapping("/api/shopping")
 public class ShoppingCartController {
@@ -31,7 +30,7 @@ public class ShoppingCartController {
      * POST /api/shopping-carts/create
      * Açıklama: Yeni bir alışveriş sepeti oluşturur.
      */
-    @PostMapping("/create")
+    @PostMapping("")
     public ShoppingCart createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCartService.createShoppingCart(shoppingCart);
     }
@@ -43,7 +42,7 @@ public class ShoppingCartController {
     }
     // Belirtilen cartId'ye sahip alışveriş sepetini siler.
 
-    @DeleteMapping("/delete/{cartId}")
+    @DeleteMapping("/{cartId}")
     public boolean deleteShoppingCart(@PathVariable int cartId) {
         boolean existsShoppingCartId = shoppingCartService.existsShoppingCartId(cartId);
         if (existsShoppingCartId) {

@@ -22,19 +22,28 @@ public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @GetMapping(value = "") // başarılı (full)
-    public List<CategoryDto> getAllCategories() {
+    public ResponseEntity<List<CategoryDto>> getAllCategories() {
         List<CategoryDto> categoryList = categoryService.getAllCategories();
-        logger.info("Listeleme Başarılı");
-        return categoryList;
-
+        if(categoryList != null){
+            logger.info("Kategoriler Listelendi");
+            return ResponseEntity.ok(categoryList);
+        }
+            logger.info("Kategoriler Listeleme Başarısız");
+            return ResponseEntity.notFound().build();
         // return categoryService.getAllCategories();
 
     }
 
     @GetMapping("/{categoryId}") // başarılı (id + name)
-    public CategoryDto getCategoryById(@PathVariable int categoryId) {
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int categoryId) {
         CategoryDto category = categoryService.getCategoryById(categoryId);
-        return category;
+        if(category != null){
+            logger.info("Kategori Basariyla Goruntulendi");
+            return ResponseEntity.ok(category);
+        }
+        logger.info("getCategoryById Hata!");
+        return ResponseEntity.notFound().build();
+        
 
         // return categoryService.getCategoryById(categoryId);
     }
@@ -46,16 +55,26 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}") // başarılı
-    public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto) {
         CategoryDto category = categoryService.updateCategory(categoryDto);
-        return category;
+        if(category != null){
+            logger.info("Kategori Basariyla Guncellendi");
+            return ResponseEntity.ok(category);
+        }
+        logger.info("Kategori Guncelleme Basarisiz");
+        return ResponseEntity.notFound().build();
+
     }
 
     @GetMapping(value = "/searchByName/{name}")
-    public List<Category> searchByName(@PathVariable("name") String name) {
+    public ResponseEntity<List<Category>> searchByName(@PathVariable("name") String name) {
         List<Category> categoryList = categoryService.searchCategoriesByCategoryName(name);
-        return categoryList;
-
+        if(categoryList.size()<0){
+            logger.info("Kategori Bulundu");
+            return ResponseEntity.ok(categoryList);
+        }
+        logger.info("Kategori Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{categoryId}")
