@@ -1,4 +1,4 @@
-package com.btkakademi.finalproject.model.dto;
+package com.btkakademi.finalproject.model.vm.ProductVm;
 
 import java.util.List;
 
@@ -6,10 +6,9 @@ import com.btkakademi.finalproject.model.entity.Category;
 import com.btkakademi.finalproject.model.entity.Order;
 import com.btkakademi.finalproject.model.entity.ShoppingCart;
 
-public class ProductDto {
+public class AddProductVm {
 
-    private int productId;
-
+    private String name;
     private String productName;
 
     private double price;
@@ -18,18 +17,18 @@ public class ProductDto {
 
     private int stock;
 
-    private int categoryId;
+    private Category category;
 
-    //private List<ShoppingCart> shoppingCarts;
+    private List<ShoppingCart> shoppingCarts;
 
-    //private List<Order> orders;
+    private List<Order> orders;
 
-    public int getProductId() {
-        return productId;
+    public String getName() {
+        return name;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getProductName() {
@@ -64,13 +63,28 @@ public class ProductDto {
         this.stock = stock;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
+    public List<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
+
+    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
 }

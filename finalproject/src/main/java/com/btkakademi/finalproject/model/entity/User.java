@@ -45,6 +45,14 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     // constructor
     public User(String username, String password) {
         this.username = username;

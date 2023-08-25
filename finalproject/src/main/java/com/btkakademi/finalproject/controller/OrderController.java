@@ -1,8 +1,15 @@
 package com.btkakademi.finalproject.controller;
 
+import com.btkakademi.finalproject.exception.category.CategoryNotFoundException;
+import com.btkakademi.finalproject.model.dto.AddOrderDto;
+import com.btkakademi.finalproject.model.dto.OrderDto;
 import com.btkakademi.finalproject.model.entity.Order;
 import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.service.OrderService;
+import com.btkakademi.finalproject.util.mapper.CategoryMapper;
+import com.btkakademi.finalproject.util.mapper.OrderMapper;
+import com.btkakademi.finalproject.util.mapper.ProductMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,46 +23,45 @@ public class OrderController {
     @Autowired
     OrderService service;
 
-    @Autowired
-    public OrderController(OrderService service) {
-        this.service = service;
-    }
-
-    @PostMapping(value = "")
-    public ResponseEntity<String> addOrder(@RequestBody Order order) {
-        service.addOrder(order);
+    @PostMapping(value = "") // başarılı
+    public ResponseEntity<String> addOrder(@RequestBody AddOrderDto orderDto) {
+        service.addOrder(orderDto);
         return ResponseEntity.ok("Order ekleme başarılı");
     }
 
     // YAPILACAK
-    @PutMapping("/{orderId}")
-    public Order updateOrder(@PathVariable int orderId, @RequestBody Order order) {
-        order.setOrderId(orderId);
-        return service.updateOrder(order,orderId);
+    @PutMapping("/{orderId}") // user dönmüyor
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable int orderId, @RequestBody OrderDto orderDto) {
+        OrderDto order = service.updateOrder(orderDto, orderId);
+        return ResponseEntity.ok(order);
     }
 
-    @DeleteMapping("/{orderId}")
-    public boolean deleteOrder(@PathVariable int orderId) {
-        boolean existsOrderById = service.existsOrderById(orderId);
-        if (existsOrderById) {
+
+    @DeleteMapping("/{orderId}")// silme başarlı
+    public ResponseEntity<String> deleteOrder(@PathVariable int orderId) {
+        boolean deleteOrder = service.deleteOrder(orderId);
+        if (deleteOrder) {
             service.deleteOrder(orderId);
-            return true;
+            return ResponseEntity.ok("Sipariş Silindi");
         }
-        return false;
+        return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{orderId}")
-    public Order searchOrderByOrderId(@PathVariable int orderId) {
-        return service.searchOrderByOrderId(orderId);
+
+    @GetMapping("/{orderId}") // order_ıd dönüyor user boş
+    public ResponseEntity<OrderDto> searchOrderByOrderId(@PathVariable int orderId) {
+        OrderDto orderDto = service.searchOrderByOrderId(orderId);
+        return ResponseEntity.ok(orderDto);
+    }
+    @GetMapping(value = "") // sadece orderId
+    public List<OrderDto> getAllOrders() {
+        List<OrderDto> allOrders = service.getAllOrders();
+        return allOrders;
     }
 
-    @GetMapping(value = "")
-    public List<Order> getAllOrders() {
-        return service.getAllOrders();
-    }
-
-    @GetMapping("/{orderId}/products")
+    @GetMapping("/products/{orderId}")// bu çalışmıyor
     public List<Product> getAllProducts(@PathVariable int orderId) {
-        return service.getAllProducts(orderId);
+        List<Product> products = ProductMapper.mapProductDtoListToProductList(service.getAllProducts(orderId));
+        return products;
     }
 }

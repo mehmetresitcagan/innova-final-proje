@@ -21,7 +21,7 @@ public class CategoryController {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-    @GetMapping(value = "/getAll") // başarılı (full)
+    @GetMapping(value = "") // başarılı (full)
     public List<CategoryDto> getAllCategories() {
         List<CategoryDto> categoryList = categoryService.getAllCategories();
         logger.info("Listeleme Başarılı");

@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.controller;
 
+import com.btkakademi.finalproject.model.dto.ProductDto;
 import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService service;
@@ -19,7 +20,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
         return service.getAllProducts();
     }
 

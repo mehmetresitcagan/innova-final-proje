@@ -2,6 +2,7 @@ package com.btkakademi.finalproject.model.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Category {
     @Column(name = "kategori_adi")
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Product> products;
 
     public int getCategoryId() {

@@ -2,22 +2,23 @@ package com.btkakademi.finalproject.service;
 
 import java.util.List;
 
-import com.btkakademi.finalproject.model.entity.Order;
-import com.btkakademi.finalproject.model.entity.Product;
+import com.btkakademi.finalproject.model.dto.AddOrderDto;
+import com.btkakademi.finalproject.model.dto.OrderDto;
+import com.btkakademi.finalproject.model.dto.ProductDto;
 
 public interface OrderService {
-    int addOrder(Order order);
+    int addOrder(AddOrderDto orderDto);
 
     boolean deleteOrder(int orderId);
 
-    Order updateOrder(Order order, int orderId);
+    OrderDto updateOrder(OrderDto orderDto, int orderId);
 
     boolean existsOrderById(int orderId);
 
-    Order searchOrderByOrderId(int orderId);
+    OrderDto searchOrderByOrderId(int orderId);
 
-    List<Order> getAllOrders();
+    List<OrderDto> getAllOrders();
 
-    // siparişin içindeki tüm ürünleri getir.
-    List<Product> getAllProducts(int orderId);
+    // Siparişin içindeki tüm ürünleri getir.
+    List<ProductDto> getAllProducts(int orderId);
 }

@@ -1,4 +1,4 @@
-package com.btkakademi.finalproject.model.dto;
+package com.btkakademi.finalproject.model.vm.ProductVm;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import com.btkakademi.finalproject.model.entity.Category;
 import com.btkakademi.finalproject.model.entity.Order;
 import com.btkakademi.finalproject.model.entity.ShoppingCart;
 
-public class ProductDto {
-
+public class ProductVm {
     private int productId;
 
     private String productName;
@@ -18,11 +17,11 @@ public class ProductDto {
 
     private int stock;
 
-    private int categoryId;
+    private Category category;
 
-    //private List<ShoppingCart> shoppingCarts;
+    private List<ShoppingCart> shoppingCarts;
 
-    //private List<Order> orders;
+    private List<Order> orders;
 
     public int getProductId() {
         return productId;
@@ -64,13 +63,27 @@ public class ProductDto {
         this.stock = stock;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
+    public List<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
 
+    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

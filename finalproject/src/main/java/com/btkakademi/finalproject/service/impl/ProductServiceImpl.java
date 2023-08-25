@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.btkakademi.finalproject.model.dto.ProductDto;
 import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.repository.ProductRepository;
 import com.btkakademi.finalproject.service.ProductService;
+import com.btkakademi.finalproject.util.mapper.ProductMapper;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -17,8 +19,10 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository repository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return repository.findAll();
+    public List<ProductDto> getAllProducts() {
+         List<Product> products = repository.findAll();
+         List<ProductDto> productDtoList = ProductMapper.mapProductListToProductDtoList(products);
+        return productDtoList;
     }
 
     @Override

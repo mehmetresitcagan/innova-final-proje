@@ -1,12 +1,13 @@
 package com.btkakademi.finalproject.service;
 
+import com.btkakademi.finalproject.model.dto.ProductDto;
 import com.btkakademi.finalproject.model.entity.Product;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getAllProducts();
+    List<ProductDto> getAllProducts();
 
     Product getProductById(int productId);
 

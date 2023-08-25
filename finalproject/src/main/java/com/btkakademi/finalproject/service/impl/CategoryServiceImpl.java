@@ -13,7 +13,9 @@ import com.btkakademi.finalproject.exception.UserBasedException;
 import com.btkakademi.finalproject.exception.category.CategoryNotFoundException;
 import com.btkakademi.finalproject.model.dto.CategoryDto;
 import com.btkakademi.finalproject.model.entity.Category;
+import com.btkakademi.finalproject.model.entity.Product;
 import com.btkakademi.finalproject.repository.CategoryRepository;
+import com.btkakademi.finalproject.repository.ProductRepository;
 import com.btkakademi.finalproject.service.CategoryService;
 import com.btkakademi.finalproject.util.mapper.CategoryMapper;
 
@@ -22,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     CategoryRepository repository;
+    ProductRepository productRepository;
 
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
@@ -77,15 +80,26 @@ public class CategoryServiceImpl implements CategoryService {
      * }
      */
 
-    @Override
-    public boolean deleteCategory(int categoryId) {
-
-        if (existsCategoryById(categoryId)) {
-            repository.deleteById(categoryId);
-            return true;
-        }
-        return false;
-    }
+     @Override
+     public boolean deleteCategory(int categoryId) {
+         Optional<Category> categoryOptional = repository.findById(categoryId);
+     
+         if (categoryOptional.isPresent()) {
+             Category category = categoryOptional.get();
+             List<Product> products = category.getProducts();
+             for (Product product : products) {
+                // Ürünü ilgili listelerden çıkar
+                //product.getShoppingCarts().clear(); // Örnek olarak ShoppingCart listesinden çıkar
+                //product.getOrders().clear(); // Örnek olarak Order listesinden çıkar
+                
+                // Ürünü veritabanından sil
+                productRepository.delete(product);
+            }
+             repository.delete(category);
+             return true;
+         }
+         return false;
+     }
 
     
     /*
