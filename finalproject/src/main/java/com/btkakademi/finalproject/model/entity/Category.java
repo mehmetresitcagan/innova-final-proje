@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -22,8 +23,8 @@ public class Category {
     @Column(name = "kategori_adi")
     private String categoryName;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Product> products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public int getCategoryId() {
         return categoryId;

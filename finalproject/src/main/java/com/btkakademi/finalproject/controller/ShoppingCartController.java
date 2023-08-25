@@ -27,8 +27,14 @@ public class ShoppingCartController {
 
     // Belirtilen cartId'ye sahip alışveriş sepetini alır.
     @GetMapping("/{cartId}")
-    public ShoppingCart getShoppingCartById(@PathVariable int cartId) {
-        return shoppingCartService.getShoppingCartById(cartId);
+    public ResponseEntity<ShoppingCart> getShoppingCartById(@PathVariable int cartId) {
+        ShoppingCart shoppingCartById = shoppingCartService.getShoppingCartById(cartId);
+        if (shoppingCartById != null) {
+            logger.info("Alışveriş sepeti bulundu.");
+            return ResponseEntity.ok(shoppingCartById);
+        }
+        logger.info("Alışveriş sepeti Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
 
     /*
