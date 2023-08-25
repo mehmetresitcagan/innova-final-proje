@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;

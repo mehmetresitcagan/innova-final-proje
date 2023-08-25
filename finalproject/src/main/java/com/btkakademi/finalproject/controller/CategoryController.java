@@ -82,8 +82,10 @@ public class CategoryController {
         boolean deleted = categoryService.deleteCategory(categoryId);
 
         if (deleted) {
+            logger.info("Kategori Silme Basarili");
             return ResponseEntity.ok("Kategori silindi");
         } else {
+            logger.info("Kategori Bulundu");
             return ResponseEntity.notFound().build();
         }
     }

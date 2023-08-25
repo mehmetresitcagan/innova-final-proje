@@ -22,7 +22,7 @@ public class Category {
     @Column(name = "kategori_adi")
     private String categoryName;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Product> products;
 
     public int getCategoryId() {

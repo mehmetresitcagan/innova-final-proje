@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.service;
 
+import com.btkakademi.finalproject.model.dto.UserDto;
 import com.btkakademi.finalproject.model.entity.User;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface UserService {
 
     User getUserById(int userId);
 
-    User createUser(User user);
+    UserDto createUser(UserDto user);
 
     User updateUser(int userId, User user);
 

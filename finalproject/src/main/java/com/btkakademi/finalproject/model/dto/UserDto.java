@@ -1,5 +1,6 @@
 package com.btkakademi.finalproject.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDto {
@@ -11,7 +12,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String roles;
-    private List<OrderDto> orders;
+    private List<OrderDto> orders = new ArrayList<>();
 
     // Constructors
     public UserDto() {
