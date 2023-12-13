@@ -15,70 +15,65 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
+    
+    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     ProductService service;
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         List<ProductDto> allProducts = service.getAllProducts();
-        if (allProducts.size() > 0) {
-            logger.info("Urun Listeleme Basarili");
+        if (allProducts != null) {
+            logger.info("Ürünler bulundu");
             return ResponseEntity.ok(allProducts);
         }
-        logger.info("Urun Listeleme Basarisiz");
+        logger.info("Ürünler bulunamadı.");
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable int productId) {
-        Product productById = service.getProductById(productId);
+    public ResponseEntity<Product> getProductByProductId(@PathVariable int productId) {
+        Product productById = service.getProductByProductId(productId);
         if (productById != null) {
-            logger.info("GetProductById Basarili");
+            logger.info("Ürün bulundu");
             return ResponseEntity.ok(productById);
         }
-        logger.info("GetProductById Basarisiz");
+        logger.info("Ürün bulunamadı.");
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("")
     public int addProduct(@RequestBody Product product) {
+        logger.info("Ürün eklendi.");
         return service.addProduct(product);
-
     }
 
     @PutMapping("/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable int productId, @RequestBody Product product) {
+        product.setProductId(productId);
         Product updateProduct = service.updateProduct(product, productId);
         if (updateProduct != null) {
-            product.setProductId(productId);
-            logger.info("Urun Guncelleme :Basarili  ");
+            logger.info("Ürün güncellendi.");
             return ResponseEntity.ok(updateProduct);
         }
-        logger.info("Urun Guncelleme : Basarisiz");
+        logger.info("Ürün güncellenemedi.");
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable int productId) {
-        boolean deleteProduct = service.deleteProduct(productId);
-        if (deleteProduct) {
-            logger.info("Urun Silme: Basarili");
-            return ResponseEntity.ok("Urun Silme Islemi Gerceklesti: " + productId);
-        }
-        logger.info("Urun Silme : Basarisiz");
-        return ResponseEntity.notFound().build();
+    public boolean deleteProduct(@PathVariable int productId) {
+        logger.info("Ürün silindi.");
+        return service.deleteProduct(productId);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Product>> searchProductByName(@RequestParam String productName) {
-        List<Product> searchProductByName = service.searchProductByName(productName);
-        if (searchProductByName.size() > 0) {
-            logger.info("Urun Listeleme Basarili");
+    @GetMapping("/{productName}")
+    public ResponseEntity<List<Product>> searchProductByProductName(@RequestParam String productName) {
+        List<Product> searchProductByName = service.searchProductByProductName(productName);
+        if (searchProductByName != null) {
+            logger.info("Ürün bulundu.");
             return ResponseEntity.ok(searchProductByName);
         }
-        logger.info("Siparis Listeleme Basarisiz");
+        logger.info("Ürün bulunamadı.");
         return ResponseEntity.notFound().build();
     }
 }

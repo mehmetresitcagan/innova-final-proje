@@ -1,6 +1,9 @@
 package com.btkakademi.finalproject.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +23,18 @@ public class ShoppingCartController {
     @Autowired
     ShoppingCartService shoppingCartService;
 
+    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+
     // Belirtilen cartId'ye sahip alışveriş sepetini alır.
     @GetMapping("/{cartId}")
-    public ShoppingCart getShoppingCartById(@PathVariable int cartId) {
-        return shoppingCartService.getShoppingCartById(cartId);
+    public ResponseEntity<ShoppingCart> getShoppingCartById(@PathVariable int cartId) {
+        ShoppingCart shoppingCartById = shoppingCartService.getShoppingCartById(cartId);
+        if (shoppingCartById != null) {
+            logger.info("Alışveriş sepeti bulundu.");
+            return ResponseEntity.ok(shoppingCartById);
+        }
+        logger.info("Alışveriş sepeti Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
 
     /*
@@ -31,25 +42,40 @@ public class ShoppingCartController {
      * Açıklama: Yeni bir alışveriş sepeti oluşturur.
      */
     @PostMapping("")
-    public ShoppingCart createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
-        return shoppingCartService.createShoppingCart(shoppingCart);
+    public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
+        ShoppingCart createCart = shoppingCartService.createShoppingCart(shoppingCart);
+        if (createCart != null) {
+            logger.info("Alışveriş sepeti başarıyla oluşturuldu.");
+            return ResponseEntity.ok(createCart);
+        }
+        logger.info("Alışveriş sepeti Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
     // Belirtilen cartId'ye sahip alışveriş sepetini günceller.
 
     @PutMapping("/{cartId}")
-    public ShoppingCart updateShoppingCart(@PathVariable int cartId, @RequestBody ShoppingCart shoppingCart) {
-        return shoppingCartService.updateShoppingCart(cartId, shoppingCart);
+    public ResponseEntity<ShoppingCart> updateShoppingCart(@PathVariable int cartId,
+            @RequestBody ShoppingCart shoppingCart) {
+        ShoppingCart updateCart = shoppingCartService.updateShoppingCart(cartId, shoppingCart);
+        if (updateCart != null) {
+            logger.info("Alışveriş sepeti başarıyla güncellendi.");
+            return ResponseEntity.ok(updateCart);
+        }
+        logger.info("Alışveriş sepeti Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
     // Belirtilen cartId'ye sahip alışveriş sepetini siler.
 
     @DeleteMapping("/{cartId}")
-    public boolean deleteShoppingCart(@PathVariable int cartId) {
+    public Object deleteShoppingCart(@PathVariable int cartId) {
         boolean existsShoppingCartId = shoppingCartService.existsShoppingCartId(cartId);
         if (existsShoppingCartId) {
+            logger.info("Alışveriş sepeti silindi.");
             shoppingCartService.deleteShoppingCart(cartId);
-            return true;
+            return ResponseEntity.ok(true);
         }
-        return false;
+        logger.info("Alışveriş sepeti Bulunamadi");
+        return ResponseEntity.notFound().build();
     }
 
 }

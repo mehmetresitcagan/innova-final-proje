@@ -1,10 +1,8 @@
 package com.btkakademi.finalproject.controller;
 
-import com.btkakademi.finalproject.model.dto.UserDto;
 import com.btkakademi.finalproject.model.entity.User;
 import com.btkakademi.finalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +24,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) { // userID de istiyor sıkıntı mı ?
-        UserDto createUser = userService.createUser(user);
-        return ResponseEntity.ok(createUser);
+    public User createUser(@RequestBody User user) { // userID de istiyor sıkıntı mı ?
+        return userService.createUser(user);
     }
 
     @PutMapping("/{userId}")
