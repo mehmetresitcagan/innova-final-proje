@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(int productId) {
+    public Product getProductByProductId(int productId) {
         Optional<Product> optionalProduct = repository.findById(productId);
         if (!optionalProduct.isPresent()) {
             throw new RuntimeException("Searched product could not found. Bad request. Check your params");
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product, int productId) {
-        Product tempProduct = getProductById(productId);
+        Product tempProduct = getProductByProductId(productId);
         if (repository.existsById(productId)) {
             tempProduct.setProductId(product.getProductId());
             tempProduct.setProductName(product.getProductName());
@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchProductByName(String productName) {
+    public List<Product> searchProductByProductName(String productName) {
         List<Product> products = repository.findByProductName(productName);
         return products;
     }

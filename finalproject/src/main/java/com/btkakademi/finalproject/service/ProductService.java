@@ -9,7 +9,7 @@ public interface ProductService {
 
     List<ProductDto> getAllProducts();
 
-    Product getProductById(int productId);
+    Product getProductByProductId(int productId);
 
     int addProduct(Product product);
 
@@ -17,7 +17,7 @@ public interface ProductService {
 
     boolean deleteProduct(int productId);
 
-    List<Product> searchProductByName(String productName);
+    List<Product> searchProductByProductName(String productName);
 
     boolean existsProductById(int productId);
 }
